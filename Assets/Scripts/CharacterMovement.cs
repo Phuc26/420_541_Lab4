@@ -39,6 +39,30 @@ public class CharacterMovement : MonoBehaviour
     void UpdateAnimator()
     {
         isOnGround = controller.isGrounded; 
+        Vector3 characterXandZMotion = new Vector3(playerVelocity.x,0.0f,playerVelocity.z);
+        if (Mathf.Abs(Input.GetAxis("Horizontal"))>0.0f || Mathf.Abs(Input.GetAxis("Vertical"))>0.0f)
+        {
+            if(Input.GetButton("Fire3"))
+            {
+                animator.SetFloat("Speed", 1.0f);
+            }
+            else
+            {
+                animator.SetFloat("Speed", 0.5f);
+            }
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0.0f);
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            animator.applyRootMotion = true;
+            animator.SetTrigger("DoRoll");
+        }
+
+        animator.SetBool("IsGrounded", isOnGround);
+
         // TODO 
         
         
